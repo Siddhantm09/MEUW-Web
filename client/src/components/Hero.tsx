@@ -1,12 +1,13 @@
 import { Users, Shield, MapPin } from "lucide-react";
 
 interface HeroProps {
-  style?: React.CSSProperties;
+  title: string;
+  subtitle: string;
 }
 
 const Hero: React.FC<HeroProps> = () => {
   return (
-    <section className="relative h-screen bg-gradient-to-r from-slate-800 to-slate-600 flex items-center">
+    <section className="relative min-h-screen bg-gradient-to-r from-slate-800 to-slate-600 flex items-center">
       <div className="absolute inset-0 bg-black opacity-40"></div>
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -16,21 +17,21 @@ const Hero: React.FC<HeroProps> = () => {
         }}
       ></div>
 
-      <div className="max-w-full mx-auto px-6 relative z-10">
-        <div className="max-w-3xl">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+      <div className="max-w-full mx-auto px-4 sm:px-6 relative z-10 w-full">
+        <div className="max-w-4xl mx-auto lg:mx-0">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
             Strengthening Maritime Workers,
             <span className="text-orange-400 block">Securing Our Future</span>
           </h1>
-          <p className="text-xl text-gray-200 mb-8">
+          <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 max-w-3xl">
             Dedicated to the welfare and advancement of Marine Engineers and
             Maritime Workers across India under the Bharatiya Janata Party
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md sm:max-w-none">
+            <button className="bg-orange-600 hover:bg-orange-700 text-white px-6 sm:px-8 py-3 rounded-lg font-semibold transition-colors w-full sm:w-auto">
               Join Our Union
             </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-slate-800 px-8 py-3 rounded-lg font-semibold transition-colors">
+            <button className="border-2 border-white text-white hover:bg-white hover:text-slate-800 px-6 sm:px-8 py-3 rounded-lg font-semibold transition-colors w-full sm:w-auto">
               Learn More
             </button>
           </div>
@@ -38,23 +39,35 @@ const Hero: React.FC<HeroProps> = () => {
       </div>
 
       {/* Floating Stats */}
-      <div className="absolute bottom-8 left-0 right-0 px-6">
+      <div className="absolute bottom-4 sm:bottom-8 left-4 right-4 sm:left-6 sm:right-6">
         <div className="max-w-full mx-auto">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             <div className="text-center">
-              <Users className="w-8 h-8 text-orange-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">5,000+</div>
-              <div className="text-gray-300">Active Members</div>
+              <Users className="w-6 h-6 sm:w-8 sm:h-8 text-orange-400 mx-auto mb-2" />
+              <div className="text-xl sm:text-2xl font-bold text-white">
+                5,000+
+              </div>
+              <div className="text-gray-300 text-sm sm:text-base">
+                Active Members
+              </div>
             </div>
             <div className="text-center">
-              <Shield className="w-8 h-8 text-orange-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">25+</div>
-              <div className="text-gray-300">Years of Service</div>
+              <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-orange-400 mx-auto mb-2" />
+              <div className="text-xl sm:text-2xl font-bold text-white">
+                25+
+              </div>
+              <div className="text-gray-300 text-sm sm:text-base">
+                Years of Service
+              </div>
             </div>
             <div className="text-center">
-              <MapPin className="w-8 h-8 text-orange-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">15+</div>
-              <div className="text-gray-300">Branch Offices</div>
+              <MapPin className="w-6 h-6 sm:w-8 sm:h-8 text-orange-400 mx-auto mb-2" />
+              <div className="text-xl sm:text-2xl font-bold text-white">
+                15+
+              </div>
+              <div className="text-gray-300 text-sm sm:text-base">
+                Branch Offices
+              </div>
             </div>
           </div>
         </div>
