@@ -1,8 +1,8 @@
 import { Phone, Mail, Users, Anchor } from "lucide-react";
 
 interface FooterProps {
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
 }
 
 const Footer: React.FC<FooterProps> = () => {
@@ -83,11 +83,28 @@ const Footer: React.FC<FooterProps> = () => {
           </div>
         </div>
 
-        <div className="border-t border-slate-600 mt-8 sm:mt-12 pt-6 sm:pt-8 text-center">
-          <p className="text-gray-400 text-xs sm:text-sm">
-            © 2025 BJP Marine Engineers and Workers Union - All India | All
-            Rights Reserved
-          </p>
+        {/* Legal Links */}
+        <div className="border-t border-slate-600 mt-8 sm:mt-12 pt-6 sm:pt-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <p className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
+              © 2025 BJP Marine Engineers and Workers Union - All India | All
+              Rights Reserved
+            </p>
+            <div className="flex flex-wrap justify-center sm:justify-end space-x-4 sm:space-x-6">
+              <a
+                href="#terms"
+                className="text-gray-400 hover:text-orange-400 transition-colors text-xs sm:text-sm"
+              >
+                Terms and Conditions
+              </a>
+              <a
+                href="#privacy"
+                className="text-gray-400 hover:text-orange-400 transition-colors text-xs sm:text-sm"
+              >
+                Privacy Policy
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
