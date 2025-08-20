@@ -1,25 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Import your existing components
 import AboutSection from "./components/AboutSection";
-
 import Hero from "./components/Hero";
 import ScrollingBanner from "./components/ScrollingBanner";
 import ServicesSection from "./components/ServicesSection";
 
-// Import the new components
-import DonationPage from "./components/DonationPage";
-
-import SecretaryMessagePage from "./components/SecretaryMessagePage";
-
-import LegalPages from "./components/LegalPages";
-
 // Header component with navigation
 import { Anchor, Menu, X, ChevronDown } from "lucide-react";
-import HistoryPage from "./components/History";
-import CommitteeStructure from "./components/CommiteeStructure";
 
-const Header = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
+const Header = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
@@ -27,8 +19,8 @@ const Header = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
 
-  const handleNavigation = (page: string) => {
-    onNavigate(page);
+  const handleNavigation = (path: string) => {
+    navigate(path);
     setIsMenuOpen(false);
     setActiveDropdown(null);
   };
@@ -38,7 +30,7 @@ const Header = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
       <div className="max-w-full mx-auto flex items-center justify-between">
         <div
           className="flex items-center space-x-2 sm:space-x-4 cursor-pointer"
-          onClick={() => handleNavigation("home")}
+          onClick={() => navigate("/")}
         >
           <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-500 rounded-full flex items-center justify-center">
             <Anchor className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -57,7 +49,7 @@ const Header = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
         <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
           {/* About Us Dropdown */}
           <div
-            className="relative"
+            className="relative group"
             onMouseEnter={() => setActiveDropdown("about")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
@@ -67,26 +59,28 @@ const Header = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
             </button>
 
             {activeDropdown === "about" && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
-                <button
-                  onClick={() => handleNavigation("history")}
-                  className="block w-full text-left px-4 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                >
-                  History
-                </button>
-                <button
-                  onClick={() => handleNavigation("secretary-message")}
-                  className="block w-full text-left px-4 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                >
-                  Message from General Secretary
-                </button>
+              <div className="absolute top-full left-0 pt-2 w-48 z-50">
+                <div className="bg-white rounded-lg shadow-lg py-2 border border-gray-100">
+                  <button
+                    onClick={() => handleNavigation("/history")}
+                    className="block w-full text-left px-4 py-3 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                  >
+                    History
+                  </button>
+                  <button
+                    onClick={() => handleNavigation("/secretary-message")}
+                    className="block w-full text-left px-4 py-3 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                  >
+                    Message from General Secretary
+                  </button>
+                </div>
               </div>
             )}
           </div>
 
           {/* Structure Dropdown */}
           <div
-            className="relative"
+            className="relative group"
             onMouseEnter={() => setActiveDropdown("structure")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
@@ -96,19 +90,21 @@ const Header = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
             </button>
 
             {activeDropdown === "structure" && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
-                <button
-                  onClick={() => handleNavigation("national-committee")}
-                  className="block w-full text-left px-4 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                >
-                  National Committee
-                </button>
-                <button
-                  onClick={() => handleNavigation("state-committee")}
-                  className="block w-full text-left px-4 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                >
-                  State Committee
-                </button>
+              <div className="absolute top-full left-0 pt-2 w-48 z-50">
+                <div className="bg-white rounded-lg shadow-lg py-2 border border-gray-100">
+                  <button
+                    onClick={() => handleNavigation("/national-committee")}
+                    className="block w-full text-left px-4 py-3 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                  >
+                    National Committee
+                  </button>
+                  <button
+                    onClick={() => handleNavigation("/state-committee")}
+                    className="block w-full text-left px-4 py-3 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                  >
+                    State Committee
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -126,12 +122,15 @@ const Header = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
             Contact Us
           </a>
           <button
-            onClick={() => handleNavigation("donation")}
+            onClick={() => handleNavigation("/donations")}
             className="bg-orange-600 hover:bg-orange-700 px-3 py-2 xl:px-4 xl:py-2 rounded transition-colors text-sm xl:text-base"
           >
             Donation
           </button>
-          <button className="bg-slate-600 hover:bg-slate-700 px-3 py-2 xl:px-4 xl:py-2 rounded transition-colors text-sm xl:text-base">
+          <button
+            onClick={() => handleNavigation("/membershipregistration")}
+            className="bg-slate-600 hover:bg-slate-700 px-3 py-2 xl:px-4 xl:py-2 rounded transition-colors text-sm xl:text-base"
+          >
             Membership Registration
           </button>
         </nav>
@@ -169,13 +168,13 @@ const Header = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
               {activeDropdown === "mobile-about" && (
                 <div className="pl-8 space-y-2">
                   <button
-                    onClick={() => handleNavigation("history")}
+                    onClick={() => handleNavigation("/history")}
                     className="block w-full text-left hover:text-orange-400 transition-colors px-4 py-2 text-sm"
                   >
                     History
                   </button>
                   <button
-                    onClick={() => handleNavigation("secretary-message")}
+                    onClick={() => handleNavigation("/secretary-message")}
                     className="block w-full text-left hover:text-orange-400 transition-colors px-4 py-2 text-sm"
                   >
                     Message from General Secretary
@@ -200,13 +199,13 @@ const Header = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
               {activeDropdown === "mobile-structure" && (
                 <div className="pl-8 space-y-2">
                   <button
-                    onClick={() => handleNavigation("national-committee")}
+                    onClick={() => handleNavigation("/national-committee")}
                     className="block w-full text-left hover:text-orange-400 transition-colors px-4 py-2 text-sm"
                   >
                     National Committee
                   </button>
                   <button
-                    onClick={() => handleNavigation("state-committee")}
+                    onClick={() => handleNavigation("/state-committee")}
                     className="block w-full text-left hover:text-orange-400 transition-colors px-4 py-2 text-sm"
                   >
                     State Committee
@@ -230,12 +229,15 @@ const Header = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
               Contact Us
             </a>
             <button
-              onClick={() => handleNavigation("donation")}
+              onClick={() => handleNavigation("/donations")}
               className="bg-orange-600 hover:bg-orange-700 px-4 py-3 rounded transition-colors mx-4 mt-2"
             >
               Donation
             </button>
-            <button className="bg-slate-600 hover:bg-slate-700 px-4 py-3 rounded transition-colors mx-4 mt-2">
+            <button
+              onClick={() => handleNavigation("/membershipregistration")}
+              className="bg-slate-600 hover:bg-slate-700 px-4 py-3 rounded transition-colors mx-4 mt-2"
+            >
               Membership Registration
             </button>
           </nav>
@@ -245,12 +247,10 @@ const Header = ({ onNavigate }: { onNavigate: (page: string) => void }) => {
   );
 };
 
-// Updated Footer with Terms and Privacy links
-const UpdatedFooter = ({
-  onNavigate,
-}: {
-  onNavigate: (page: string) => void;
-}) => {
+// Updated Footer with navigation
+const UpdatedFooter = () => {
+  const navigate = useNavigate();
+
   return (
     <footer
       id="contact"
@@ -297,7 +297,10 @@ const UpdatedFooter = ({
               role in protecting and promoting the rights, welfare, and
               interests of maritime professionals.
             </p>
-            <button className="bg-orange-600 hover:bg-orange-700 px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base w-full sm:w-auto">
+            <button
+              onClick={() => navigate("/membershipregistration")}
+              className="bg-orange-600 hover:bg-orange-700 px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base w-full sm:w-auto"
+            >
               Membership Registration →
             </button>
           </div>
@@ -312,13 +315,13 @@ const UpdatedFooter = ({
             </p>
             <div className="flex flex-wrap justify-center sm:justify-end space-x-4 sm:space-x-6">
               <button
-                onClick={() => onNavigate("terms")}
+                onClick={() => navigate("/terms")}
                 className="text-gray-400 hover:text-orange-400 transition-colors text-xs sm:text-sm"
               >
                 Terms and Conditions
               </button>
               <button
-                onClick={() => onNavigate("privacy")}
+                onClick={() => navigate("/privacy")}
                 className="text-gray-400 hover:text-orange-400 transition-colors text-xs sm:text-sm"
               >
                 Privacy Policy
@@ -331,94 +334,24 @@ const UpdatedFooter = ({
   );
 };
 
-// Main App Component
-type PageType =
-  | "home"
-  | "history"
-  | "secretary-message"
-  | "national-committee"
-  | "state-committee"
-  | "donation"
-  | "terms"
-  | "privacy";
-
+// Main App Component - now just the home page
 const MEWUWebsite = () => {
-  const [currentPage, setCurrentPage] = useState<PageType>("home");
-
-  const handleNavigation = (page: string) => {
-    setCurrentPage(page as PageType);
-  };
-
-  const handleBackToHome = () => {
-    setCurrentPage("home");
-  };
-
-  const renderCurrentPage = () => {
-    switch (currentPage) {
-      case "home":
-        return (
-          <div className="min-h-screen bg-white">
-            <Header onNavigate={handleNavigation} />
-            <Hero title="Main Hero Title" subtitle="Main Hero Subtitle" />
-            <ScrollingBanner title="Banner Title" subtitle="Banner Subtitle" />
-            <AboutSection
-              title="About Section Title"
-              subtitle="About Section Subtitle"
-            />
-            <ServicesSection
-              title="Services Section Title"
-              subtitle="Services Section Subtitle"
-            />
-            <UpdatedFooter onNavigate={handleNavigation} />
-          </div>
-        );
-
-      case "donation":
-        return <DonationPage onBack={handleBackToHome} />;
-
-      case "history":
-        return <HistoryPage onBack={handleBackToHome} />;
-
-      case "secretary-message":
-        return <SecretaryMessagePage onBack={handleBackToHome} />;
-
-      case "national-committee":
-        return (
-          <CommitteeStructure onBack={handleBackToHome} initialTab="national" />
-        );
-
-      case "state-committee":
-        return (
-          <CommitteeStructure onBack={handleBackToHome} initialTab="state" />
-        );
-
-      case "terms":
-        return <LegalPages onBack={handleBackToHome} initialPage="terms" />;
-
-      case "privacy":
-        return <LegalPages onBack={handleBackToHome} initialPage="privacy" />;
-
-      default:
-        return (
-          <div className="min-h-screen bg-white">
-            <Header onNavigate={handleNavigation} />
-            <Hero title="Main Hero Title" subtitle="Main Hero Subtitle" />
-            <ScrollingBanner title="Banner Title" subtitle="Banner Subtitle" />
-            <AboutSection
-              title="About Section Title"
-              subtitle="About Section Subtitle"
-            />
-            <ServicesSection
-              title="Services Section Title"
-              subtitle="Services Section Subtitle"
-            />
-            <UpdatedFooter onNavigate={handleNavigation} />
-          </div>
-        );
-    }
-  };
-
-  return renderCurrentPage();
+  return (
+    <div className="min-h-screen bg-white">
+      <Header />
+      <Hero title="Main Hero Title" subtitle="Main Hero Subtitle" />
+      <ScrollingBanner title="Banner Title" subtitle="Banner Subtitle" />
+      <AboutSection
+        title="About Section Title"
+        subtitle="About Section Subtitle"
+      />
+      <ServicesSection
+        title="Services Section Title"
+        subtitle="Services Section Subtitle"
+      />
+      <UpdatedFooter />
+    </div>
+  );
 };
 
 export default MEWUWebsite;

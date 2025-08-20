@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   CreditCard,
@@ -9,11 +10,8 @@ import {
   IndianRupee,
 } from "lucide-react";
 
-interface DonationPageProps {
-  onBack?: () => void;
-}
-
-const DonationPage: React.FC<DonationPageProps> = ({ onBack }) => {
+const DonationPage: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     contact: "",
@@ -53,15 +51,13 @@ const DonationPage: React.FC<DonationPageProps> = ({ onBack }) => {
       {/* Header */}
       <div className="bg-slate-800 text-white py-4 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto flex items-center space-x-4">
-          {onBack && (
-            <button
-              onClick={onBack}
-              className="flex items-center space-x-2 hover:text-orange-400 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Back</span>
-            </button>
-          )}
+          <button
+            onClick={() => navigate("/")}
+            className="flex items-center space-x-2 hover:text-orange-400 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span>Back to Home</span>
+          </button>
           <h1 className="text-xl sm:text-2xl font-bold">Support Our Union</h1>
         </div>
       </div>
