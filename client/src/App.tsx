@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MEWUWebsite from "./Mewu";
 import DonationPage from "./components/DonationPage";
 import HistoryPage from "./components/History";
 import SecretaryMessagePage from "./components/SecretaryMessagePage";
@@ -11,6 +10,7 @@ import UpcomingMeetingsPage from "./components/UpcomingMeetingsPage";
 import ProgramsPage from "./components/ProgramsPage";
 import SponsorsPage from "./components/SponsorsPage";
 import AchievementsPage from "./components/AchievementsPage";
+import { MEWUWebsite } from "./Mewu";
 
 function App() {
   return (

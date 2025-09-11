@@ -1,32 +1,41 @@
 interface ScrollingBannerProps {
-  title: string;
-  subtitle: string;
+  messages?: string[];
+  animationSpeed?: number;
+  backgroundColor?: string;
 }
 
-const ScrollingBanner: React.FC<ScrollingBannerProps> = () => {
+const ScrollingBanner: React.FC<ScrollingBannerProps> = ({
+  messages = [
+    "🚢 Empowering Maritime Workforce",
+    "⚓ Protecting Workers' Rights",
+    "🔧 Supporting Marine Engineers",
+    "🇮🇳 Building Stronger India",
+  ],
+  animationSpeed = 20,
+  backgroundColor = "bg-slate-700",
+}) => {
+  const duplicatedMessages = [...messages, ...messages]; // Duplicate for seamless loop
+
   return (
     <>
       {/* Scrolling Text */}
-      <div className="bg-slate-700 py-3 sm:py-4 overflow-hidden w-full">
-        <div className="animate-scroll whitespace-nowrap">
-          <span className="text-orange-400 text-sm sm:text-base lg:text-lg font-semibold mx-4 sm:mx-8">
-            🚢 Empowering Maritime Workforce
-          </span>
-          <span className="text-white text-sm sm:text-base lg:text-lg mx-4 sm:mx-8">
-            ⚓ Protecting Workers' Rights
-          </span>
-          <span className="text-orange-400 text-sm sm:text-base lg:text-lg font-semibold mx-4 sm:mx-8">
-            🔧 Supporting Marine Engineers
-          </span>
-          <span className="text-white text-sm sm:text-base lg:text-lg mx-4 sm:mx-8">
-            🇮🇳 Building Stronger India
-          </span>
-          <span className="text-orange-400 text-sm sm:text-base lg:text-lg font-semibold mx-4 sm:mx-8">
-            🚢 Empowering Maritime Workforce
-          </span>
-          <span className="text-white text-sm sm:text-base lg:text-lg mx-4 sm:mx-8">
-            ⚓ Protecting Workers' Rights
-          </span>
+      <div className={`${backgroundColor} py-3 sm:py-4 overflow-hidden w-full`}>
+        <div
+          className="animate-scroll whitespace-nowrap"
+          style={{
+            animationDuration: `${animationSpeed}s`,
+          }}
+        >
+          {duplicatedMessages.map((message, index) => (
+            <span
+              key={index}
+              className={`${
+                index % 2 === 0 ? "text-orange-400 font-semibold" : "text-white"
+              } text-sm sm:text-base lg:text-lg mx-4 sm:mx-8`}
+            >
+              {message}
+            </span>
+          ))}
         </div>
       </div>
 
@@ -39,7 +48,7 @@ const ScrollingBanner: React.FC<ScrollingBannerProps> = () => {
             100% { transform: translateX(-100%); }
           }
           .animate-scroll {
-            animation: scroll 20s linear infinite;
+            animation: scroll ${animationSpeed}s linear infinite;
           }
         `,
         }}

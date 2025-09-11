@@ -1,37 +1,60 @@
 import { Users, Shield, MapPin } from "lucide-react";
 
 interface HeroProps {
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
+  backgroundImage?: string;
+  onJoinClick?: () => void;
+  onLearnMoreClick?: () => void;
 }
 
-const Hero: React.FC<HeroProps> = () => {
+const Hero: React.FC<HeroProps> = ({
+  title = "Strengthening Maritime Workers, Securing Our Future",
+  subtitle = "Dedicated to the welfare and advancement of Marine Engineers and Maritime Workers across India under the Bharatiya Janata Party",
+  backgroundImage = "./src/assets/IMG-20230926-WA0013.jpg",
+  onJoinClick,
+  onLearnMoreClick,
+}) => {
   return (
-    <section className="relative min-h-screen bg-gradient-to-r from-slate-800 to-slate-600 flex items-center">
-      <div className="absolute inset-0 bg-black opacity-40"></div>
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage:
-            'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23334155" width="1200" height="800"/><path fill="%23475569" d="M0 400c200-50 400-100 600-50s400 100 600 50v400H0z"/><circle fill="%23f97316" cx="900" cy="200" r="60" opacity="0.8"/><rect fill="%23064e3b" x="850" y="350" width="100" height="200" opacity="0.6"/></svg>\')',
+          backgroundImage: `url('${backgroundImage}')`,
         }}
-      ></div>
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-slate-900/70"></div>
 
       <div className="max-w-full mx-auto px-4 sm:px-6 relative z-10 w-full">
         <div className="max-w-4xl mx-auto lg:mx-0">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-            Strengthening Maritime Workers,
-            <span className="text-orange-400 block">Securing Our Future</span>
+            {title.includes(",") ? (
+              <>
+                {title.split(",")[0]},
+                <span className="text-orange-400 block">
+                  {title.split(",")[1]}
+                </span>
+              </>
+            ) : (
+              title
+            )}
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 max-w-3xl">
-            Dedicated to the welfare and advancement of Marine Engineers and
-            Maritime Workers across India under the Bharatiya Janata Party
+            {subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md sm:max-w-none">
-            <button className="bg-orange-600 hover:bg-orange-700 text-white px-6 sm:px-8 py-3 rounded-lg font-semibold transition-colors w-full sm:w-auto">
+            <button
+              onClick={onJoinClick}
+              className="bg-orange-600 hover:bg-orange-700 text-white px-6 sm:px-8 py-3 rounded-lg font-semibold transition-colors w-full sm:w-auto"
+            >
               Join Our Union
             </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-slate-800 px-6 sm:px-8 py-3 rounded-lg font-semibold transition-colors w-full sm:w-auto">
+            <button
+              onClick={onLearnMoreClick}
+              className="border-2 border-white text-white hover:bg-white hover:text-slate-800 px-6 sm:px-8 py-3 rounded-lg font-semibold transition-colors w-full sm:w-auto"
+            >
               Learn More
             </button>
           </div>

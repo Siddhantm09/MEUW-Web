@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-// Import your existing components
-import AboutSection from "./components/AboutSection";
+import { Anchor, Menu, X, ChevronDown } from "lucide-react";
 import Hero from "./components/Hero";
 import ScrollingBanner from "./components/ScrollingBanner";
+import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
-
-// Header component with navigation
-import { Anchor, Menu, X, ChevronDown } from "lucide-react";
-
-const Header = () => {
-  const navigate = useNavigate();
+import GallerySection from "./components/GallerySection";
+import Footer from "./components/Footer";
+interface HeaderProps {
+  onNavigate?: (path: string) => void;
+}
+interface GalleryImage {
+  caption: string;
+  // Add other properties as needed
+}
+const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
@@ -20,7 +22,11 @@ const Header = () => {
   };
 
   const handleNavigation = (path: string) => {
-    navigate(path);
+    if (onNavigate) {
+      onNavigate(path);
+    } else {
+      console.log(`Navigating to: ${path}`);
+    }
     setIsMenuOpen(false);
     setActiveDropdown(null);
   };
@@ -30,7 +36,7 @@ const Header = () => {
       <div className="max-w-full mx-auto flex items-center justify-between">
         <div
           className="flex items-center space-x-2 sm:space-x-4 cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => handleNavigation("/")}
         >
           <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-500 rounded-full flex items-center justify-center">
             <Anchor className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -115,7 +121,6 @@ const Header = () => {
             )}
           </div>
 
-          {/* Upcoming Meetings */}
           <button
             onClick={() => handleNavigation("/upcoming-meetings")}
             className="hover:text-orange-400 transition-colors text-sm xl:text-base"
@@ -123,7 +128,6 @@ const Header = () => {
             Upcoming Meetings
           </button>
 
-          {/* Programs */}
           <button
             onClick={() => handleNavigation("/programs")}
             className="hover:text-orange-400 transition-colors text-sm xl:text-base"
@@ -131,7 +135,6 @@ const Header = () => {
             Programs
           </button>
 
-          {/* Sponsors */}
           <button
             onClick={() => handleNavigation("/sponsors")}
             className="hover:text-orange-400 transition-colors text-sm xl:text-base"
@@ -300,112 +303,196 @@ const Header = () => {
     </header>
   );
 };
+export default Header;
+interface AppProps {
+  // Optional props for customization
+  theme?: "light" | "dark";
+  showGallery?: boolean;
+}
 
-// Updated Footer with navigation
-const UpdatedFooter = () => {
-  const navigate = useNavigate();
+export const MEWUWebsite: React.FC<AppProps> = ({
+  theme = "light",
+  showGallery = true,
+}) => {
+  // Navigation handler
+  const handleNavigation = (path: string) => {
+    console.log(`Navigation requested to: ${path}`);
+    // In a real app, you would use React Router or Next.js router here
+    // For now, we'll just log the navigation
+  };
+
+  // Hero button handlers
+  const handleJoinUnion = () => {
+    console.log("Join Union clicked");
+    handleNavigation("/membershipregistration");
+  };
+
+  const handleLearnMore = () => {
+    console.log("Learn More clicked");
+    // Smooth scroll to about section
+    const aboutSection = document.getElementById("about");
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // About section handler
+  const handleLearnMoreAbout = () => {
+    console.log("Learn More About Our Work clicked");
+    handleNavigation("/about");
+  };
+
+  // Gallery image click handler
+  const handleGalleryImageClick = (image: GalleryImage, index: number) => {
+    console.log(`Gallery image clicked: ${image.caption} at index ${index}`);
+    // In a real app, you might open a modal or lightbox here
+  };
+
+  // Membership registration handler
+  const handleMembershipClick = () => {
+    console.log("Membership Registration clicked");
+    handleNavigation("/membershipregistration");
+  };
 
   return (
-    <footer
-      id="contact"
-      className="bg-slate-800 text-white py-12 sm:py-16 w-full"
+    <div
+      className={`min-h-screen ${
+        theme === "dark" ? "bg-slate-900" : "bg-white"
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
-          {/* Logo and Info */}
-          <div className="md:col-span-2 lg:col-span-1">
-            <div className="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-6">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <Anchor className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-              </div>
-              <div>
-                <h3 className="text-lg sm:text-xl font-bold leading-tight">
-                  ALL INDIA BJP MARINE
-                </h3>
-                <h3 className="text-lg sm:text-xl font-bold leading-tight">
-                  ENGINEERS AND WORKERS UNION
-                </h3>
-              </div>
-            </div>
-          </div>
+      {/* Header */}
+      <Header onNavigate={handleNavigation} />
 
-          {/* Head Office */}
-          <div>
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
-              Head Office
-            </h3>
-            <div className="space-y-2 sm:space-y-4 text-sm sm:text-base">
-              <p>All India BJP Marine Engineers and Workers Union,</p>
-              <p>Union Bhavan, Marine Drive,</p>
-              <p>Mumbai - 400 001. (India)</p>
-            </div>
-          </div>
+      {/* Hero Section */}
+      <Hero
+        title="Strengthening Maritime Workers, Securing Our Future"
+        subtitle="Dedicated to the welfare and advancement of Marine Engineers and Maritime Workers across India under the Bharatiya Janata Party"
+        backgroundImage="./src/assets/IMG-20230926-WA0013.jpg"
+        onJoinClick={handleJoinUnion}
+        onLearnMoreClick={handleLearnMore}
+      />
 
-          {/* Membership */}
-          <div className="md:col-span-2 lg:col-span-1">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
-              Membership
-            </h3>
-            <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
-              All India BJP Marine Engineers and Workers Union plays a vital
-              role in protecting and promoting the rights, welfare, and
-              interests of maritime professionals.
-            </p>
-            <button
-              onClick={() => navigate("/membershipregistration")}
-              className="bg-orange-600 hover:bg-orange-700 px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base w-full sm:w-auto"
-            >
-              Membership Registration →
-            </button>
-          </div>
-        </div>
+      {/* Scrolling Banner */}
+      <ScrollingBanner
+        messages={[
+          "🚢 Empowering Maritime Workforce",
+          "⚓ Protecting Workers' Rights",
+          "🔧 Supporting Marine Engineers",
+          "🇮🇳 Building Stronger India",
+          "💼 Career Development Programs",
+          "🛡️ Legal Protection Services",
+        ]}
+        animationSpeed={25}
+      />
 
-        {/* Legal Links */}
-        <div className="border-t border-slate-600 mt-8 sm:mt-12 pt-6 sm:pt-8">
-          <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-            <p className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
-              © 2025 BJP Marine Engineers and Workers Union - All India | All
-              Rights Reserved
-            </p>
-            <div className="flex flex-wrap justify-center sm:justify-end space-x-4 sm:space-x-6">
-              <button
-                onClick={() => navigate("/terms")}
-                className="text-gray-400 hover:text-orange-400 transition-colors text-xs sm:text-sm"
-              >
-                Terms and Conditions
-              </button>
-              <button
-                onClick={() => navigate("/privacy")}
-                className="text-gray-400 hover:text-orange-400 transition-colors text-xs sm:text-sm"
-              >
-                Privacy Policy
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
-// Main App Component - now just the home page
-const MEWUWebsite = () => {
-  return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <Hero title="Main Hero Title" subtitle="Main Hero Subtitle" />
-      <ScrollingBanner title="Banner Title" subtitle="Banner Subtitle" />
+      {/* About Section */}
       <AboutSection
-        title="About Section Title"
-        subtitle="About Section Subtitle"
+        title="About BJP Marine Engineers Union"
+        subtitle="THE LEADING UNION FOR MARITIME PROFESSIONALS SINCE 2000"
+        description={[
+          "All India BJP Marine Engineers and Workers Union stands as the premier organization dedicated to the welfare, rights, and advancement of marine engineers and maritime workers across India. Operating under the Bharatiya Janata Party's vision of a stronger India, we ensure that our maritime professionals receive the support, protection, and opportunities they deserve.",
+          "Our union represents all domains of maritime workers including marine engineers, deck officers, ratings, port workers, and shore-based maritime professionals. We work tirelessly to improve working conditions, secure fair wages, provide training opportunities, and ensure safety standards across the Indian maritime industry.",
+        ]}
+        images={[
+          {
+            src: "./src/assets/IMG-20230124-WA0041.jpg",
+            alt: "Maritime Workers Meeting",
+            size: "large",
+          },
+          {
+            src: "./src/assets/IMG-20230825-WA0002.jpg",
+            alt: "Union Conference",
+            size: "small",
+          },
+          {
+            src: "./src/assets/IMG-20230124-WA0042.jpg",
+            alt: "Marine Engineers",
+            size: "small",
+          },
+          {
+            src: "./src/assets/IMG-20230926-WA0021.jpg",
+            alt: "Workers Assembly",
+            size: "large",
+          },
+        ]}
+        onLearnMoreClick={handleLearnMoreAbout}
       />
+
+      {/* Services Section */}
       <ServicesSection
-        title="Services Section Title"
-        subtitle="Services Section Subtitle"
+        title="Our Services & Benefits"
+        subtitle="Comprehensive support and services for all maritime professionals across India"
       />
-      <UpdatedFooter />
+
+      {/* Gallery Section (conditional) */}
+      {showGallery && (
+        <GallerySection
+          title="Our Activities & Events"
+          subtitle="Showcasing our commitment to maritime professionals through various programs and initiatives"
+          images={[
+            {
+              src: "./src/assets/IMG-20231016-WA0002.jpg",
+              alt: "Union Meeting 2023",
+              caption: "Annual General Meeting",
+              category: "Meetings",
+              date: "October 2023",
+            },
+            {
+              src: "./src/assets/IMG-20231025-WA0002.jpg",
+              alt: "Training Program",
+              caption: "Skills Development Program",
+              category: "Training",
+              date: "October 2023",
+            },
+            {
+              src: "./src/assets/IMG-20231025-WA0004.jpg",
+              alt: "Workers Conference",
+              caption: "Maritime Workers Conference",
+              category: "Conference",
+              date: "October 2023",
+            },
+            {
+              src: "./src/assets/IMG-20231025-WA0005.jpg",
+              alt: "Safety Training",
+              caption: "Safety Training Session",
+              category: "Training",
+              date: "October 2023",
+            },
+            {
+              src: "./src/assets/IMG-20231025-WA0007.jpg",
+              alt: "Award Ceremony",
+              caption: "Excellence Awards 2023",
+              category: "Awards",
+              date: "October 2023",
+            },
+            {
+              src: "./src/assets/IMG-20231025-WA0009.jpg",
+              alt: "Community Event",
+              caption: "Community Outreach Program",
+              category: "Community",
+              date: "October 2023",
+            },
+          ]}
+          onImageClick={handleGalleryImageClick}
+        />
+      )}
+
+      {/* Footer */}
+      <Footer
+        onNavigate={handleNavigation}
+        onMembershipClick={handleMembershipClick}
+        contactInfo={{
+          address: [
+            "All India BJP Marine Engineers and Workers Union,",
+            "Union Bhavan, Marine Drive,",
+            "Mumbai - 400 001. (India)",
+          ],
+          email: "info@bjpmewu.org.in",
+          phone: "022 12345678",
+          website: "www.bjpmewu.org.in",
+          workingHours: "Mon-Fri: 9:00 AM - 6:00 PM",
+        }}
+      />
     </div>
   );
 };
-
-export default MEWUWebsite;
