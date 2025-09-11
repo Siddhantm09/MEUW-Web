@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Anchor, Menu, X, ChevronDown } from "lucide-react";
 import Hero from "./components/Hero";
 import ScrollingBanner from "./components/ScrollingBanner";
@@ -6,14 +7,14 @@ import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
 import GallerySection from "./components/GallerySection";
 import Footer from "./components/Footer";
-interface HeaderProps {
-  onNavigate?: (path: string) => void;
-}
+
 interface GalleryImage {
   caption: string;
   // Add other properties as needed
 }
-const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
+
+const Header: React.FC = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
@@ -22,11 +23,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   };
 
   const handleNavigation = (path: string) => {
-    if (onNavigate) {
-      onNavigate(path);
-    } else {
-      console.log(`Navigating to: ${path}`);
-    }
+    navigate(path);
     setIsMenuOpen(false);
     setActiveDropdown(null);
   };
@@ -36,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
       <div className="max-w-full mx-auto flex items-center justify-between">
         <div
           className="flex items-center space-x-2 sm:space-x-4 cursor-pointer"
-          onClick={() => handleNavigation("/")}
+          onClick={() => navigate("/")}
         >
           <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-500 rounded-full flex items-center justify-center">
             <Anchor className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -303,9 +300,8 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
     </header>
   );
 };
-export default Header;
+
 interface AppProps {
-  // Optional props for customization
   theme?: "light" | "dark";
   showGallery?: boolean;
 }
@@ -314,21 +310,19 @@ export const MEWUWebsite: React.FC<AppProps> = ({
   theme = "light",
   showGallery = true,
 }) => {
-  // Navigation handler
+  const navigate = useNavigate();
+
+  // Navigation handler using useNavigate
   const handleNavigation = (path: string) => {
-    console.log(`Navigation requested to: ${path}`);
-    // In a real app, you would use React Router or Next.js router here
-    // For now, we'll just log the navigation
+    navigate(path);
   };
 
   // Hero button handlers
   const handleJoinUnion = () => {
-    console.log("Join Union clicked");
     handleNavigation("/membershipregistration");
   };
 
   const handleLearnMore = () => {
-    console.log("Learn More clicked");
     // Smooth scroll to about section
     const aboutSection = document.getElementById("about");
     if (aboutSection) {
@@ -338,7 +332,6 @@ export const MEWUWebsite: React.FC<AppProps> = ({
 
   // About section handler
   const handleLearnMoreAbout = () => {
-    console.log("Learn More About Our Work clicked");
     handleNavigation("/about");
   };
 
@@ -350,7 +343,6 @@ export const MEWUWebsite: React.FC<AppProps> = ({
 
   // Membership registration handler
   const handleMembershipClick = () => {
-    console.log("Membership Registration clicked");
     handleNavigation("/membershipregistration");
   };
 
@@ -361,7 +353,7 @@ export const MEWUWebsite: React.FC<AppProps> = ({
       }`}
     >
       {/* Header */}
-      <Header onNavigate={handleNavigation} />
+      <Header />
 
       {/* Hero Section */}
       <Hero
