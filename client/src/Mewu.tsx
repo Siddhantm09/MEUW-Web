@@ -46,7 +46,7 @@ const Header = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+        <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
           {/* About Us Dropdown */}
           <div
             className="relative group"
@@ -59,7 +59,7 @@ const Header = () => {
             </button>
 
             {activeDropdown === "about" && (
-              <div className="absolute top-full left-0 pt-2 w-48 z-50">
+              <div className="absolute top-full left-0 pt-2 w-52 z-50">
                 <div className="bg-white rounded-lg shadow-lg py-2 border border-gray-100">
                   <button
                     onClick={() => handleNavigation("/history")}
@@ -72,6 +72,12 @@ const Header = () => {
                     className="block w-full text-left px-4 py-3 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
                   >
                     Message from General Secretary
+                  </button>
+                  <button
+                    onClick={() => handleNavigation("/achievements")}
+                    className="block w-full text-left px-4 py-3 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                  >
+                    Our Achievements
                   </button>
                 </div>
               </div>
@@ -109,6 +115,30 @@ const Header = () => {
             )}
           </div>
 
+          {/* Upcoming Meetings */}
+          <button
+            onClick={() => handleNavigation("/upcoming-meetings")}
+            className="hover:text-orange-400 transition-colors text-sm xl:text-base"
+          >
+            Upcoming Meetings
+          </button>
+
+          {/* Programs */}
+          <button
+            onClick={() => handleNavigation("/programs")}
+            className="hover:text-orange-400 transition-colors text-sm xl:text-base"
+          >
+            Programs
+          </button>
+
+          {/* Sponsors */}
+          <button
+            onClick={() => handleNavigation("/sponsors")}
+            className="hover:text-orange-400 transition-colors text-sm xl:text-base"
+          >
+            Sponsors
+          </button>
+
           <a
             href="#services"
             className="hover:text-orange-400 transition-colors text-sm xl:text-base"
@@ -131,7 +161,7 @@ const Header = () => {
             onClick={() => handleNavigation("/membershipregistration")}
             className="bg-slate-600 hover:bg-slate-700 px-3 py-2 xl:px-4 xl:py-2 rounded transition-colors text-sm xl:text-base"
           >
-            Membership Registration
+            Registration
           </button>
         </nav>
 
@@ -179,6 +209,12 @@ const Header = () => {
                   >
                     Message from General Secretary
                   </button>
+                  <button
+                    onClick={() => handleNavigation("/achievements")}
+                    className="block w-full text-left hover:text-orange-400 transition-colors px-4 py-2 text-sm"
+                  >
+                    Our Achievements
+                  </button>
                 </div>
               )}
             </div>
@@ -214,6 +250,24 @@ const Header = () => {
               )}
             </div>
 
+            <button
+              onClick={() => handleNavigation("/upcoming-meetings")}
+              className="hover:text-orange-400 transition-colors px-4 py-2 text-left"
+            >
+              Upcoming Meetings
+            </button>
+            <button
+              onClick={() => handleNavigation("/programs")}
+              className="hover:text-orange-400 transition-colors px-4 py-2 text-left"
+            >
+              Programs
+            </button>
+            <button
+              onClick={() => handleNavigation("/sponsors")}
+              className="hover:text-orange-400 transition-colors px-4 py-2 text-left"
+            >
+              Sponsors
+            </button>
             <a
               href="#services"
               className="hover:text-orange-400 transition-colors px-4 py-2"
@@ -238,7 +292,7 @@ const Header = () => {
               onClick={() => handleNavigation("/membershipregistration")}
               className="bg-slate-600 hover:bg-slate-700 px-4 py-3 rounded transition-colors mx-4 mt-2"
             >
-              Membership Registration
+              Registration
             </button>
           </nav>
         </div>

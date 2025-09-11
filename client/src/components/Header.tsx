@@ -1,13 +1,9 @@
 import { Anchor, Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-interface HeaderProps {
-  title?: string;
-  subtitle?: string;
-  onNavigate?: (page: string) => void;
-}
-
-const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
+const Header = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
@@ -15,10 +11,8 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
 
-  const handleNavigation = (page: string) => {
-    if (onNavigate) {
-      onNavigate(page);
-    }
+  const handleNavigation = (path: string) => {
+    navigate(path);
     setIsMenuOpen(false);
     setActiveDropdown(null);
   };
@@ -28,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
       <div className="max-w-full mx-auto flex items-center justify-between">
         <div
           className="flex items-center space-x-2 sm:space-x-4 cursor-pointer"
-          onClick={() => handleNavigation("home")}
+          onClick={() => navigate("/")}
         >
           <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-500 rounded-full flex items-center justify-center">
             <Anchor className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -44,10 +38,10 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+        <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
           {/* About Us Dropdown */}
           <div
-            className="relative"
+            className="relative group"
             onMouseEnter={() => setActiveDropdown("about")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
@@ -57,26 +51,34 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
             </button>
 
             {activeDropdown === "about" && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
-                <button
-                  onClick={() => handleNavigation("history")}
-                  className="block w-full text-left px-4 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                >
-                  History
-                </button>
-                <button
-                  onClick={() => handleNavigation("secretary-message")}
-                  className="block w-full text-left px-4 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                >
-                  Message from General Secretary
-                </button>
+              <div className="absolute top-full left-0 pt-2 w-52 z-50">
+                <div className="bg-white rounded-lg shadow-lg py-2 border border-gray-100">
+                  <button
+                    onClick={() => handleNavigation("/history")}
+                    className="block w-full text-left px-4 py-3 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                  >
+                    History
+                  </button>
+                  <button
+                    onClick={() => handleNavigation("/secretary-message")}
+                    className="block w-full text-left px-4 py-3 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                  >
+                    Message from General Secretary
+                  </button>
+                  <button
+                    onClick={() => handleNavigation("/achievements")}
+                    className="block w-full text-left px-4 py-3 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                  >
+                    Our Achievements
+                  </button>
+                </div>
               </div>
             )}
           </div>
 
           {/* Structure Dropdown */}
           <div
-            className="relative"
+            className="relative group"
             onMouseEnter={() => setActiveDropdown("structure")}
             onMouseLeave={() => setActiveDropdown(null)}
           >
@@ -86,22 +88,48 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
             </button>
 
             {activeDropdown === "structure" && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
-                <button
-                  onClick={() => handleNavigation("national-committee")}
-                  className="block w-full text-left px-4 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                >
-                  National Committee
-                </button>
-                <button
-                  onClick={() => handleNavigation("state-committee")}
-                  className="block w-full text-left px-4 py-2 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                >
-                  State Committee
-                </button>
+              <div className="absolute top-full left-0 pt-2 w-48 z-50">
+                <div className="bg-white rounded-lg shadow-lg py-2 border border-gray-100">
+                  <button
+                    onClick={() => handleNavigation("/national-committee")}
+                    className="block w-full text-left px-4 py-3 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                  >
+                    National Committee
+                  </button>
+                  <button
+                    onClick={() => handleNavigation("/state-committee")}
+                    className="block w-full text-left px-4 py-3 text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                  >
+                    State Committee
+                  </button>
+                </div>
               </div>
             )}
           </div>
+
+          {/* Upcoming Meetings */}
+          <button
+            onClick={() => handleNavigation("/upcoming-meetings")}
+            className="hover:text-orange-400 transition-colors text-sm xl:text-base"
+          >
+            Upcoming Meetings
+          </button>
+
+          {/* Programs */}
+          <button
+            onClick={() => handleNavigation("/programs")}
+            className="hover:text-orange-400 transition-colors text-sm xl:text-base"
+          >
+            Programs
+          </button>
+
+          {/* Sponsors */}
+          <button
+            onClick={() => handleNavigation("/sponsors")}
+            className="hover:text-orange-400 transition-colors text-sm xl:text-base"
+          >
+            Sponsors
+          </button>
 
           <a
             href="#services"
@@ -116,13 +144,16 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
             Contact Us
           </a>
           <button
-            onClick={() => handleNavigation("donation")}
+            onClick={() => handleNavigation("/donations")}
             className="bg-orange-600 hover:bg-orange-700 px-3 py-2 xl:px-4 xl:py-2 rounded transition-colors text-sm xl:text-base"
           >
             Donation
           </button>
-          <button className="bg-slate-600 hover:bg-slate-700 px-3 py-2 xl:px-4 xl:py-2 rounded transition-colors text-sm xl:text-base">
-            Membership Registration
+          <button
+            onClick={() => handleNavigation("/membershipregistration")}
+            className="bg-slate-600 hover:bg-slate-700 px-3 py-2 xl:px-4 xl:py-2 rounded transition-colors text-sm xl:text-base"
+          >
+            Registration
           </button>
         </nav>
 
@@ -159,16 +190,22 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
               {activeDropdown === "mobile-about" && (
                 <div className="pl-8 space-y-2">
                   <button
-                    onClick={() => handleNavigation("history")}
+                    onClick={() => handleNavigation("/history")}
                     className="block w-full text-left hover:text-orange-400 transition-colors px-4 py-2 text-sm"
                   >
                     History
                   </button>
                   <button
-                    onClick={() => handleNavigation("secretary-message")}
+                    onClick={() => handleNavigation("/secretary-message")}
                     className="block w-full text-left hover:text-orange-400 transition-colors px-4 py-2 text-sm"
                   >
                     Message from General Secretary
+                  </button>
+                  <button
+                    onClick={() => handleNavigation("/achievements")}
+                    className="block w-full text-left hover:text-orange-400 transition-colors px-4 py-2 text-sm"
+                  >
+                    Our Achievements
                   </button>
                 </div>
               )}
@@ -190,13 +227,13 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
               {activeDropdown === "mobile-structure" && (
                 <div className="pl-8 space-y-2">
                   <button
-                    onClick={() => handleNavigation("national-committee")}
+                    onClick={() => handleNavigation("/national-committee")}
                     className="block w-full text-left hover:text-orange-400 transition-colors px-4 py-2 text-sm"
                   >
                     National Committee
                   </button>
                   <button
-                    onClick={() => handleNavigation("state-committee")}
+                    onClick={() => handleNavigation("/state-committee")}
                     className="block w-full text-left hover:text-orange-400 transition-colors px-4 py-2 text-sm"
                   >
                     State Committee
@@ -205,6 +242,24 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
               )}
             </div>
 
+            <button
+              onClick={() => handleNavigation("/upcoming-meetings")}
+              className="hover:text-orange-400 transition-colors px-4 py-2 text-left"
+            >
+              Upcoming Meetings
+            </button>
+            <button
+              onClick={() => handleNavigation("/programs")}
+              className="hover:text-orange-400 transition-colors px-4 py-2 text-left"
+            >
+              Programs
+            </button>
+            <button
+              onClick={() => handleNavigation("/sponsors")}
+              className="hover:text-orange-400 transition-colors px-4 py-2 text-left"
+            >
+              Sponsors
+            </button>
             <a
               href="#services"
               className="hover:text-orange-400 transition-colors px-4 py-2"
@@ -220,13 +275,16 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
               Contact Us
             </a>
             <button
-              onClick={() => handleNavigation("donation")}
+              onClick={() => handleNavigation("/donations")}
               className="bg-orange-600 hover:bg-orange-700 px-4 py-3 rounded transition-colors mx-4 mt-2"
             >
               Donation
             </button>
-            <button className="bg-slate-600 hover:bg-slate-700 px-4 py-3 rounded transition-colors mx-4 mt-2">
-              Membership Registration
+            <button
+              onClick={() => handleNavigation("/membershipregistration")}
+              className="bg-slate-600 hover:bg-slate-700 px-4 py-3 rounded transition-colors mx-4 mt-2"
+            >
+              Registration
             </button>
           </nav>
         </div>

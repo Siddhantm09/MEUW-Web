@@ -7,6 +7,11 @@ import CommitteeStructure from "./components/CommiteeStructure";
 import LegalPages from "./components/LegalPages";
 import MembershipRegistration from "./components/MembershipRegistration";
 
+import UpcomingMeetingsPage from "./components/UpcomingMeetingsPage";
+import ProgramsPage from "./components/ProgramsPage";
+import SponsorsPage from "./components/SponsorsPage";
+import AchievementsPage from "./components/AchievementsPage";
+
 function App() {
   return (
     <Router>
@@ -19,6 +24,10 @@ function App() {
         />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/secretary-message" element={<SecretaryMessagePage />} />
+        <Route path="/achievements" element={<AchievementsPage />} />
+        <Route path="/upcoming-meetings" element={<UpcomingMeetingsPage />} />
+        <Route path="/programs" element={<ProgramsPage />} />
+        <Route path="/sponsors" element={<SponsorsPage />} />
         <Route
           path="/national-committee"
           element={<CommitteeStructure initialTab="national" />}
