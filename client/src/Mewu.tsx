@@ -359,7 +359,7 @@ export const MEWUWebsite: React.FC<AppProps> = ({
       <Hero
         title="Strengthening Maritime Workers, Securing Our Future"
         subtitle="Dedicated to the welfare and advancement of Marine Engineers and Maritime Workers across India under the Bharatiya Janata Party"
-        backgroundImage="./src/assets/IMG-20230926-WA0013.jpg"
+        backgroundImage="/assets/IMG-20230926-WA0013.jpg"
         onJoinClick={handleJoinUnion}
         onLearnMoreClick={handleLearnMore}
       />
@@ -387,22 +387,22 @@ export const MEWUWebsite: React.FC<AppProps> = ({
         ]}
         images={[
           {
-            src: "./src/assets/IMG-20230124-WA0041.jpg",
+            src: "/assets/IMG-20230124-WA0041.jpg",
             alt: "Maritime Workers Meeting",
             size: "large",
           },
           {
-            src: "./src/assets/IMG-20230825-WA0002.jpg",
+            src: "/assets/IMG-20230825-WA0002.jpg",
             alt: "Union Conference",
             size: "small",
           },
           {
-            src: "./src/assets/IMG-20230124-WA0042.jpg",
+            src: "/assets/IMG-20230124-WA0042.jpg",
             alt: "Marine Engineers",
             size: "small",
           },
           {
-            src: "./src/assets/IMG-20230926-WA0021.jpg",
+            src: "/assets/IMG-20230926-WA0021.jpg",
             alt: "Workers Assembly",
             size: "large",
           },
@@ -423,42 +423,42 @@ export const MEWUWebsite: React.FC<AppProps> = ({
           subtitle="Showcasing our commitment to maritime professionals through various programs and initiatives"
           images={[
             {
-              src: "./src/assets/IMG-20231016-WA0002.jpg",
+              src: "/assets/IMG-20231016-WA0002.jpg",
               alt: "Union Meeting 2023",
               caption: "Annual General Meeting",
               category: "Meetings",
               date: "October 2023",
             },
             {
-              src: "./src/assets/IMG-20231025-WA0002.jpg",
+              src: "/assets/IMG-20231025-WA0002.jpg",
               alt: "Training Program",
               caption: "Skills Development Program",
               category: "Training",
               date: "October 2023",
             },
             {
-              src: "./src/assets/IMG-20231025-WA0004.jpg",
+              src: "/assets/IMG-20231025-WA0004.jpg",
               alt: "Workers Conference",
               caption: "Maritime Workers Conference",
               category: "Conference",
               date: "October 2023",
             },
             {
-              src: "./src/assets/IMG-20231025-WA0005.jpg",
+              src: "/assets/IMG-20231025-WA0005.jpg",
               alt: "Safety Training",
               caption: "Safety Training Session",
               category: "Training",
               date: "October 2023",
             },
             {
-              src: "./src/assets/IMG-20231025-WA0007.jpg",
+              src: "/assets/IMG-20231025-WA0007.jpg",
               alt: "Award Ceremony",
               caption: "Excellence Awards 2023",
               category: "Awards",
               date: "October 2023",
             },
             {
-              src: "./src/assets/IMG-20231025-WA0009.jpg",
+              src: "/assets/IMG-20231025-WA0009.jpg",
               alt: "Community Event",
               caption: "Community Outreach Program",
               category: "Community",
