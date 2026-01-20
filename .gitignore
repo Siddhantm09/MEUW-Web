@@ -1,0 +1,20 @@
+.venv/
+venv/
+server/.venv/
+
+# Environment files
+.env
+server/.env
+
+# Node modules (client)
+client/node_modules/
+
+# Bytecode and caches
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
