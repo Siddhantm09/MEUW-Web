@@ -16,80 +16,109 @@ const Hero: React.FC<HeroProps> = ({
   onLearnMoreClick,
 }) => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-24 sm:pt-0">
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
         style={{
           backgroundImage: `url('${backgroundImage}')`,
         }}
       />
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-slate-900/70"></div>
+      {/* Modern gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-slate-900/80 to-orange-900/70"></div>
 
-      <div className="max-w-full mx-auto px-4 sm:px-6 relative z-10 w-full">
-        <div className="max-w-4xl mx-auto lg:mx-0">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-            {title.includes(",") ? (
-              <>
-                {title.split(",")[0]},
-                <span className="text-orange-400 block">
-                  {title.split(",")[1]}
-                </span>
-              </>
-            ) : (
-              title
-            )}
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 max-w-3xl">
-            {subtitle}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md sm:max-w-none">
-            <button
-              onClick={onJoinClick}
-              className="bg-orange-600 hover:bg-orange-700 text-white px-6 sm:px-8 py-3 rounded-lg font-semibold transition-colors w-full sm:w-auto"
-            >
-              Join Our Union
-            </button>
-            <button
-              onClick={onLearnMoreClick}
-              className="border-2 border-white text-white hover:bg-white hover:text-slate-800 px-6 sm:px-8 py-3 rounded-lg font-semibold transition-colors w-full sm:w-auto"
-            >
-              Learn More
-            </button>
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-12 sm:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[70vh] sm:min-h-[80vh]">
+          {/* Left side - Empty space for future photos */}
+          <div className="hidden lg:block">
+            {/* Photo placeholder - content will be added here later */}
           </div>
-        </div>
-      </div>
 
-      {/* Floating Stats */}
-      <div className="absolute bottom-4 sm:bottom-8 left-4 right-4 sm:left-6 sm:right-6">
-        <div className="max-w-full mx-auto">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-            <div className="text-center">
-              <Users className="w-6 h-6 sm:w-8 sm:h-8 text-orange-400 mx-auto mb-2" />
-              <div className="text-xl sm:text-2xl font-bold text-white">
-                5,000+
-              </div>
-              <div className="text-gray-300 text-sm sm:text-base">
-                Active Members
-              </div>
+          {/* Right side - Content */}
+          <div className="flex flex-col justify-center space-y-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight tracking-tight">
+              {title.includes(",") ? (
+                <>
+                  {title.split(",")[0]},
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-500 block mt-2">
+                    {title.split(",")[1]}
+                  </span>
+                </>
+              ) : (
+                title
+              )}
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 font-light leading-relaxed">
+              {subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
+              <button
+                onClick={onJoinClick}
+                className="group bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 w-full sm:w-auto shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105 flex items-center justify-center gap-2"
+              >
+                Join Our Union
+                <svg
+                  className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick={onLearnMoreClick}
+                className="border-2 border-white/50 text-white hover:bg-white hover:text-slate-900 px-8 py-4 rounded-xl font-semibold transition-all duration-300 w-full sm:w-auto backdrop-blur-sm hover:scale-105"
+              >
+                Learn More
+              </button>
             </div>
-            <div className="text-center">
-              <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-orange-400 mx-auto mb-2" />
-              <div className="text-xl sm:text-2xl font-bold text-white">
-                25+
-              </div>
-              <div className="text-gray-300 text-sm sm:text-base">
-                Years of Service
-              </div>
-            </div>
-            <div className="text-center">
-              <MapPin className="w-6 h-6 sm:w-8 sm:h-8 text-orange-400 mx-auto mb-2" />
-              <div className="text-xl sm:text-2xl font-bold text-white">
-                15+
-              </div>
-              <div className="text-gray-300 text-sm sm:text-base">
-                Branch Offices
+
+            {/* Stats moved under buttons in right column */}
+            <div className="mt-8 sm:mt-12">
+              <div className="bg-white/10 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 grid grid-cols-3 gap-3 sm:gap-4 border border-white/20 shadow-2xl">
+                <div className="text-center group hover:scale-105 transition-transform duration-300">
+                  <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-orange-500/20 rounded-full mb-1 sm:mb-2">
+                    <Users className="w-5 h-5 sm:w-6 sm:h-6 text-orange-400" />
+                  </div>
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1">
+                    5,000+
+                  </div>
+                  <div className="text-gray-300 text-[10px] sm:text-xs md:text-sm font-medium leading-tight">
+                    Active Members
+                  </div>
+                </div>
+                <div className="text-center group hover:scale-105 transition-transform duration-300">
+                  <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-green-500/20 rounded-full mb-1 sm:mb-2">
+                    <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
+                  </div>
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1">
+                    25+
+                  </div>
+                  <div className="text-gray-300 text-[10px] sm:text-xs md:text-sm font-medium leading-tight">
+                    Years of Service
+                  </div>
+                </div>
+                <div className="text-center group hover:scale-105 transition-transform duration-300">
+                  <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-blue-500/20 rounded-full mb-1 sm:mb-2">
+                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+                  </div>
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1">
+                    15+
+                  </div>
+                  <div className="text-gray-300 text-[10px] sm:text-xs md:text-sm font-medium leading-tight">
+                    Branch Offices
+                  </div>
+                </div>
               </div>
             </div>
           </div>
