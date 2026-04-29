@@ -130,7 +130,7 @@ const Header: React.FC = () => {
               onClick={() => handleNavigation("/upcoming-meetings")}
               className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-orange-400 transition-all duration-200 text-sm font-medium"
             >
-              Upcoming Meetings
+              Interactions
             </button>
 
             <button
@@ -256,7 +256,7 @@ const Header: React.FC = () => {
                 onClick={() => handleNavigation("/upcoming-meetings")}
                 className="hover:text-orange-400 transition-colors px-4 py-2 text-left"
               >
-                Upcoming Meetings
+                Interactions
               </button>
               <button
                 onClick={() => handleNavigation("/programs")}

@@ -22,7 +22,9 @@ interface UpcomingMeetingsPageProps {
 const UpcomingMeetingsPage: React.FC<UpcomingMeetingsPageProps> = ({
   onBack,
 }) => {
-  const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
+  const [activeTab, setActiveTab] = useState<"upcoming" | "past" | "leader">(
+    "upcoming",
+  );
 
   const upcomingMeetings = [
     {
@@ -161,6 +163,164 @@ const UpcomingMeetingsPage: React.FC<UpcomingMeetingsPageProps> = ({
     },
   ];
 
+  const leaderInteractions = [
+    {
+      id: 201,
+      title: "One-on-One with National President",
+      type: "Leadership Mentoring",
+      date: "2025-09-10",
+      time: "2:00 PM - 3:00 PM",
+      venue: "Union Headquarters, Mumbai",
+      mode: "In-Person",
+      leader: "National President",
+      priority: "high",
+      description:
+        "Strategic discussion on union growth and member welfare initiatives.",
+      topics: [
+        "Strategic Planning for Q4",
+        "Member Feedback Analysis",
+        "Expansion Strategy",
+        "Leadership Development",
+      ],
+      attendees: "5-7 participants",
+      registration: "By Invitation",
+      status: "confirmed",
+    },
+    {
+      id: 202,
+      title: "State Leadership Roundtable",
+      type: "Strategy Session",
+      date: "2025-09-05",
+      time: "4:00 PM - 6:00 PM",
+      venue: "Online via Zoom",
+      mode: "Virtual",
+      leader: "General Secretary",
+      priority: "high",
+      description:
+        "Quarterly roundtable discussion with state leaders on operational excellence and member satisfaction.",
+      topics: [
+        "State Performance Review",
+        "Best Practices Sharing",
+        "Resource Allocation",
+        "Member Grievance Resolution",
+        "Q&A with Leadership",
+      ],
+      attendees: "All State Secretaries",
+      registration: "Required",
+      status: "confirmed",
+    },
+    {
+      id: 203,
+      title: "Executive Committee Strategy Discussion",
+      type: "Executive Meeting",
+      date: "2025-09-08",
+      time: "10:00 AM - 1:00 PM",
+      venue: "Union Bhavan, New Delhi Office",
+      mode: "Hybrid",
+      leader: "Executive Committee",
+      priority: "medium",
+      description:
+        "Quarterly executive committee meeting to discuss union policies and strategic initiatives.",
+      topics: [
+        "Financial Overview",
+        "Policy Updates",
+        "Member Services Enhancement",
+        "External Relations",
+      ],
+      attendees: "Executive Committee Members",
+      registration: "By Invitation",
+      status: "tentative",
+    },
+    {
+      id: 204,
+      title: "Youth Leadership Development Program",
+      type: "Training Session",
+      date: "2025-09-18",
+      time: "3:00 PM - 5:00 PM",
+      venue: "Training Center, Mumbai",
+      mode: "In-Person",
+      leader: "Senior Leaders & Mentors",
+      priority: "medium",
+      description:
+        "Training program for emerging youth leaders in union management and advocacy.",
+      topics: [
+        "Leadership Skills",
+        "Negotiation Techniques",
+        "Member Engagement",
+        "Conflict Resolution",
+        "Career Opportunities",
+      ],
+      attendees: "Young Leaders & Enthusiasts",
+      registration: "Open",
+      status: "confirmed",
+    },
+  ];
+
+  const pastLeaderInteractions = [
+    {
+      id: 301,
+      title: "Global Maritime Leaders Summit",
+      type: "International Forum",
+      date: "2025-08-10",
+      time: "9:00 AM - 5:00 PM",
+      venue: "Singapore Convention Center",
+      mode: "In-Person",
+      leader: "National President & International Partners",
+      attendees: "25+ leaders",
+      outcome:
+        "International cooperation framework established for maritime workers",
+      documents: ["Summit Report 2025", "Partnership Agreements"],
+    },
+    {
+      id: 302,
+      title: "Leadership Vision Workshop",
+      type: "Strategic Workshop",
+      date: "2025-08-05",
+      time: "2:00 PM - 6:00 PM",
+      venue: "Union Bhavan, Mumbai",
+      mode: "Hybrid",
+      leader: "Chief Leadership Team",
+      attendees: "50 participants",
+      outcome: "5-year strategic vision document finalized",
+      documents: ["Strategic Vision 2025-2030", "Implementation Roadmap"],
+    },
+  ];
+
+  const leadershipGallery = [
+    {
+      id: 401,
+      src: "/assets/meet/FB_IMG_1751370489151.jpg",
+      title: "Leadership Meet - Mumbai",
+      caption: "Discussion with senior leaders at Mumbai session.",
+      date: "2025-07-15",
+      leader: "National President",
+    },
+    {
+      id: 402,
+      src: "/assets/meet/IMG-20250729-WA0007.jpg",
+      title: "State Roundtable - Kolkata",
+      caption: "State leaders roundtable on member welfare.",
+      date: "2025-07-29",
+      leader: "General Secretary",
+    },
+    {
+      id: 403,
+      src: "/assets/meet/IMG-20250729-WA0013.jpg",
+      title: "Executive Discussion - Delhi",
+      caption: "Executive committee strategy discussion.",
+      date: "2025-07-29",
+      leader: "Executive Committee",
+    },
+    {
+      id: 404,
+      src: "/assets/meet/IMG_20250701_172729.jpg",
+      title: "Youth Leadership Program - Mumbai",
+      caption: "Training and mentoring for emerging leaders.",
+      date: "2025-07-01",
+      leader: "Senior Leaders & Mentors",
+    },
+  ];
+
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "high":
@@ -211,7 +371,7 @@ const UpcomingMeetingsPage: React.FC<UpcomingMeetingsPageProps> = ({
               <span>Back</span>
             </button>
           )}
-          <h1 className="text-xl sm:text-2xl font-bold">Upcoming Meetings</h1>
+          <h1 className="text-xl sm:text-2xl font-bold">Interactions</h1>
         </div>
       </div>
 
@@ -230,7 +390,7 @@ const UpcomingMeetingsPage: React.FC<UpcomingMeetingsPageProps> = ({
                 }`}
               >
                 <Calendar className="w-4 h-4" />
-                <span>Upcoming Meetings</span>
+                <span>Upcoming Interactions</span>
               </button>
               <button
                 onClick={() => setActiveTab("past")}
@@ -241,7 +401,18 @@ const UpcomingMeetingsPage: React.FC<UpcomingMeetingsPageProps> = ({
                 }`}
               >
                 <FileText className="w-4 h-4" />
-                <span>Past Meetings</span>
+                <span>Past Interactions</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("leader")}
+                className={`py-4 px-6 text-sm font-medium border-b-2 transition-colors flex items-center space-x-2 ${
+                  activeTab === "leader"
+                    ? "border-orange-500 text-orange-600"
+                    : "border-transparent text-gray-500 hover:text-gray-700"
+                }`}
+              >
+                <Users className="w-4 h-4" />
+                <span>Leader Interactions</span>
               </button>
             </nav>
           </div>
@@ -278,14 +449,14 @@ const UpcomingMeetingsPage: React.FC<UpcomingMeetingsPageProps> = ({
                       <div className="flex space-x-2">
                         <span
                           className={`px-2 py-1 rounded text-xs font-medium border ${getPriorityColor(
-                            meeting.priority
+                            meeting.priority,
                           )}`}
                         >
                           {meeting.priority.toUpperCase()}
                         </span>
                         <span
                           className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(
-                            meeting.status
+                            meeting.status,
                           )}`}
                         >
                           {meeting.status.toUpperCase()}
@@ -488,6 +659,331 @@ const UpcomingMeetingsPage: React.FC<UpcomingMeetingsPageProps> = ({
                         </li>
                       ))}
                     </ul>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Leader Interactions */}
+        {activeTab === "leader" && (
+          <div className="space-y-8">
+            {/* Upcoming Leader Interactions */}
+            <div>
+              <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                <Star className="w-5 h-5 text-purple-500 mr-2" />
+                Upcoming Leader Interactions
+              </h3>
+              <div className="space-y-4">
+                {leaderInteractions.map((interaction) => (
+                  <div
+                    key={interaction.id}
+                    className="bg-white rounded-xl p-6 shadow-lg border border-gray-100"
+                  >
+                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-4">
+                      <div className="flex-1">
+                        <div className="flex items-start justify-between mb-3">
+                          <div>
+                            <h2 className="text-xl font-bold text-slate-800 mb-2">
+                              {interaction.title}
+                            </h2>
+                            <div className="inline-block bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">
+                              {interaction.type}
+                            </div>
+                          </div>
+                          <div className="flex space-x-2">
+                            <span
+                              className={`px-2 py-1 rounded text-xs font-medium border ${
+                                interaction.priority === "high"
+                                  ? "bg-red-100 text-red-600 border-red-200"
+                                  : "bg-yellow-100 text-yellow-600 border-yellow-200"
+                              }`}
+                            >
+                              {interaction.priority.toUpperCase()}
+                            </span>
+                          </div>
+                        </div>
+                        <p className="text-gray-600 mb-4 leading-relaxed">
+                          {interaction.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Calendar className="w-4 h-4 text-purple-500" />
+                        <div>
+                          <div className="font-medium text-slate-800">
+                            {formatDate(interaction.date)}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Clock className="w-4 h-4 text-purple-500" />
+                        <div>
+                          <div className="font-medium text-slate-800">
+                            {interaction.time}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        {interaction.mode === "Virtual" ? (
+                          <Video className="w-4 h-4 text-purple-500" />
+                        ) : interaction.mode === "Hybrid" ? (
+                          <Building className="w-4 h-4 text-purple-500" />
+                        ) : (
+                          <MapPin className="w-4 h-4 text-purple-500" />
+                        )}
+                        <div>
+                          <div className="font-medium text-slate-800">
+                            {interaction.mode}
+                          </div>
+                          <div className="text-xs">{interaction.venue}</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Users className="w-4 h-4 text-purple-500" />
+                        <div>
+                          <div className="font-medium text-slate-800">
+                            Led by
+                          </div>
+                          <div className="text-xs">{interaction.leader}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-semibold text-slate-800 mb-2 flex items-center">
+                          <FileText className="w-4 h-4 text-purple-500 mr-2" />
+                          Discussion Topics
+                        </h4>
+                        <ul className="space-y-1">
+                          {interaction.topics.map((topic, index) => (
+                            <li
+                              key={index}
+                              className="text-sm text-gray-600 flex items-start"
+                            >
+                              <span className="text-purple-500 mr-2">•</span>
+                              {topic}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-slate-800 mb-2">
+                          Participation Details
+                        </h4>
+                        <div className="space-y-2 text-sm">
+                          <div className="flex items-center space-x-2">
+                            <Users className="w-4 h-4 text-purple-500" />
+                            <span className="text-gray-600">
+                              Attendees: {interaction.attendees}
+                            </span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <CheckCircle className="w-4 h-4 text-green-500" />
+                            <span className="text-gray-600">
+                              Registration: {interaction.registration}
+                            </span>
+                          </div>
+                        </div>
+
+                        {interaction.registration === "Open" && (
+                          <button className="mt-4 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition-colors">
+                            Request Invitation
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Past Leader Interactions */}
+            <div>
+              <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                <Star className="w-5 h-5 text-slate-500 mr-2" />
+                Past Leader Interactions
+              </h3>
+              <div className="space-y-4">
+                {pastLeaderInteractions.map((interaction) => (
+                  <div
+                    key={interaction.id}
+                    className="bg-white rounded-xl p-6 shadow-lg border border-gray-100"
+                  >
+                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-4">
+                      <div className="flex-1">
+                        <h2 className="text-xl font-bold text-slate-800 mb-2">
+                          {interaction.title}
+                        </h2>
+                        <div className="inline-block bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-medium">
+                          {interaction.type}
+                        </div>
+                      </div>
+                      <div className="text-sm text-gray-500 mt-2 lg:mt-0">
+                        Completed
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Calendar className="w-4 h-4 text-slate-500" />
+                        <div>
+                          <div className="font-medium text-slate-800">
+                            {formatDate(interaction.date)}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Clock className="w-4 h-4 text-slate-500" />
+                        <div>
+                          <div className="font-medium text-slate-800">
+                            {interaction.time}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        {interaction.mode === "Virtual" ? (
+                          <Video className="w-4 h-4 text-slate-500" />
+                        ) : interaction.mode === "Hybrid" ? (
+                          <Building className="w-4 h-4 text-slate-500" />
+                        ) : (
+                          <MapPin className="w-4 h-4 text-slate-500" />
+                        )}
+                        <div>
+                          <div className="font-medium text-slate-800">
+                            {interaction.mode}
+                          </div>
+                          <div className="text-xs">{interaction.venue}</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-2 text-sm text-gray-600">
+                        <Users className="w-4 h-4 text-slate-500" />
+                        <div>
+                          <div className="font-medium text-slate-800">
+                            {interaction.attendees}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-semibold text-slate-800 mb-2 flex items-center">
+                          <Star className="w-4 h-4 text-green-500 mr-2" />
+                          Outcomes
+                        </h4>
+                        <p className="text-sm text-gray-600 mb-3">
+                          {interaction.outcome}
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-slate-800 mb-2 flex items-center">
+                          <FileText className="w-4 h-4 text-blue-500 mr-2" />
+                          Available Documents
+                        </h4>
+                        <ul className="space-y-1">
+                          {interaction.documents.map((doc, index) => (
+                            <li
+                              key={index}
+                              className="text-sm text-blue-600 hover:underline cursor-pointer"
+                            >
+                              📄 {doc}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Leader Interactions Gallery */}
+        {activeTab === "leader" && (
+          <div className="space-y-8 mt-8">
+            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center">
+              <FileText className="w-5 h-5 text-purple-500 mr-2" />
+              Leadership Gallery
+            </h3>
+
+            {leadershipGallery.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 min-h-[320px]"
+              >
+                <div className="mb-4">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1 pr-4">
+                      <h2 className="text-xl font-bold text-slate-800 mb-2">
+                        {item.title}
+                      </h2>
+                      <div className="inline-block bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium mb-3">
+                        Gallery Photo
+                      </div>
+                      <p className="text-gray-600 mb-4 leading-relaxed">
+                        {item.caption}
+                      </p>
+                    </div>
+
+                    <div className="flex-shrink-0 ml-4 hidden sm:block">
+                      <img
+                        src={item.src}
+                        alt={item.title}
+                        className="w-64 h-64 object-cover rounded-lg shadow-sm"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 text-sm text-gray-600">
+                  <div className="flex items-center space-x-2">
+                    <Calendar className="w-4 h-4 text-purple-500" />
+                    <div>
+                      <div className="font-medium text-slate-800">
+                        {formatDate(item.date)}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Clock className="w-4 h-4 text-purple-500" />
+                    <div>
+                      <div className="font-medium text-slate-800">
+                        {item.time || ""}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <MapPin className="w-4 h-4 text-purple-500" />
+                    <div>
+                      <div className="font-medium text-slate-800">
+                        {item.mode || ""}
+                      </div>
+                      <div className="text-xs">{item.venue || ""}</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Users className="w-4 h-4 text-purple-500" />
+                    <div>
+                      <div className="font-medium text-slate-800">Led by</div>
+                      <div className="text-xs">{item.leader}</div>
+                    </div>
                   </div>
                 </div>
               </div>
