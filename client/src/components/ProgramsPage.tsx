@@ -22,7 +22,7 @@ interface ProgramsPageProps {
 
 const ProgramsPage: React.FC<ProgramsPageProps> = ({ onBack }) => {
   const [activeCategory, setActiveCategory] = useState<
-    "all" | "education" | "welfare" | "legal" | "training"
+    "all" | "education" | "welfare" | "legal" | "training" | "nature"
   >("all");
 
   const programs = [
@@ -200,6 +200,34 @@ const ProgramsPage: React.FC<ProgramsPageProps> = ({ onBack }) => {
       status: "active",
       featured: false,
     },
+    {
+      id: 7,
+      title: "Coastal Conservation Initiative",
+      category: "nature",
+      type: "Community Program",
+      duration: "3 months",
+      participants: "300+ participants",
+      description:
+        "Community-driven coastal conservation and beach cleanup program to protect marine habitats and promote sustainable practices.",
+      features: [
+        "Community Beach Cleanups",
+        "Habitat Restoration",
+        "Awareness Campaigns",
+        "Volunteer Training",
+      ],
+      benefits: [
+        "Cleaner Coastlines",
+        "Community Engagement",
+        "Improved Marine Health",
+      ],
+      eligibility: "Open to all members and volunteers",
+      fees: "Free",
+      nextSession: "June 2025",
+      locations: ["Mumbai Coast", "Chennai Coast"],
+      status: "active",
+      featured: true,
+      images: ["/assets/nature/program-1.jpg", "/assets/nature/program-2.jpg"],
+    },
   ];
 
   const upcomingEvents = [
@@ -237,6 +265,8 @@ const ProgramsPage: React.FC<ProgramsPageProps> = ({ onBack }) => {
         return "bg-blue-100 text-blue-600";
       case "welfare":
         return "bg-green-100 text-green-600";
+      case "nature":
+        return "bg-emerald-100 text-emerald-600";
       case "legal":
         return "bg-red-100 text-red-600";
       case "training":
@@ -252,6 +282,8 @@ const ProgramsPage: React.FC<ProgramsPageProps> = ({ onBack }) => {
         return BookOpen;
       case "welfare":
         return Heart;
+      case "nature":
+        return MapPin;
       case "legal":
         return Shield;
       case "training":
@@ -360,6 +392,17 @@ const ProgramsPage: React.FC<ProgramsPageProps> = ({ onBack }) => {
               <span>Welfare</span>
             </button>
             <button
+              onClick={() => setActiveCategory("nature")}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2 ${
+                activeCategory === "nature"
+                  ? "bg-emerald-500 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              <MapPin className="w-4 h-4" />
+              <span>Nature</span>
+            </button>
+            <button
               onClick={() => setActiveCategory("legal")}
               className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2 ${
                 activeCategory === "legal"
@@ -392,7 +435,7 @@ const ProgramsPage: React.FC<ProgramsPageProps> = ({ onBack }) => {
                     </span>
                     <span
                       className={`px-2 py-1 rounded text-xs font-medium ${getCategoryColor(
-                        program.category
+                        program.category,
                       )}`}
                     >
                       {program.category.toUpperCase()}
@@ -404,7 +447,7 @@ const ProgramsPage: React.FC<ProgramsPageProps> = ({ onBack }) => {
                   <div className="flex items-center justify-between mb-4">
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(
-                        program.category
+                        program.category,
                       )}`}
                     >
                       {program.category.toUpperCase()}
@@ -432,6 +475,19 @@ const ProgramsPage: React.FC<ProgramsPageProps> = ({ onBack }) => {
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   {program.description}
                 </p>
+
+                {program.images && program.images.length > 0 && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+                    {program.images.map((src: string, idx: number) => (
+                      <img
+                        key={idx}
+                        src={src}
+                        alt={`${program.title} ${idx + 1}`}
+                        className="w-full h-24 object-cover rounded"
+                      />
+                    ))}
+                  </div>
+                )}
 
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div className="flex items-center space-x-2 text-sm text-gray-600">
@@ -522,7 +578,7 @@ const ProgramsPage: React.FC<ProgramsPageProps> = ({ onBack }) => {
                 <div className="flex items-center justify-between mb-2">
                   <span
                     className={`px-2 py-1 rounded text-xs font-medium ${getCategoryColor(
-                      event.category
+                      event.category,
                     )}`}
                   >
                     {event.category.toUpperCase()}

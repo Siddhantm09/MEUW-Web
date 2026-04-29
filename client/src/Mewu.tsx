@@ -148,12 +148,6 @@ const Header: React.FC = () => {
             </button>
 
             <a
-              href="#services"
-              className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-orange-400 transition-all duration-200 text-sm font-medium"
-            >
-              Services
-            </a>
-            <a
               href="#contact"
               className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-orange-400 transition-all duration-200 text-sm font-medium"
             >
@@ -276,13 +270,6 @@ const Header: React.FC = () => {
               >
                 Sponsors
               </button>
-              <a
-                href="#services"
-                className="hover:text-orange-400 transition-colors px-4 py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Services
-              </a>
               <a
                 href="#contact"
                 className="hover:text-orange-400 transition-colors px-4 py-2"
